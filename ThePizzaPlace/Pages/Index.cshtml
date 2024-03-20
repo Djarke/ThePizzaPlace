@@ -1,0 +1,34 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+    var inMemberRole = User.IsInRole("Member");
+    var inAdminRole = User.IsInRole("Admin");
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to the place where all pizza is pizza'd.</h1>
+    <p>Learn about <a href="https://en.wikipedia.org/wiki/Pizza">Pizzer!</a>.</p>
+    <p>Is Admin: @inAdminRole</p>
+    <p>Is Member: @inMemberRole</p>
+</div>
+ 
+
+ <h2>Some examples of our amazing goods.</h2>
+
+ <div class="flex-container">
+       @foreach (var tblFooditems in Model.FoodItem)
+        {
+            <div>
+                <p>@Html.DisplayFor(modelitem => tblFooditems.Item_name)</p>
+                <p>@Html.DisplayFor(modelitem => tblFooditems.Price)</p>
+                <p>@Html.DisplayFor(modelitem => tblFooditems.Item_desc)</p>
+            </div>
+        }
+  </div>
+
+  <h2>Search</h2>
+  <form method="post">
+      <div>Search <input asp-for="Search" /></div>
+      <button type="submit" asp-page-handler="Search">Submit</button>
+  </form>
